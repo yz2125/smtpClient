@@ -1,5 +1,5 @@
 from socket import *
-
+import base64
 
 def smtp_client(port=1025, mailserver='127.0.0.1'):
     msg = "\r\n My message"
@@ -32,29 +32,38 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     fromCommand = "MAIL FROM:<yz2125@nyu.edu>\r\n"
     clientSocket.send(fromCommand)
     recv2=clientSocket.recv(1024)
-    print(recv2)
-    if recv2[:3] != "250":
-        print("250 reply not received from server.")
     # Fill in end
 
     # Send RCPT TO command and handle server response.
     # Fill in start
+    rcptToCommand = "RCPT TO:<zhangyuxin1169@gmail.com>\r\n"
+    clientSocket.send(rcptToCommand)
+    recv3 = clintSocket.recv(1024)
     # Fill in end
 
     # Send DATA command and handle server response.
     # Fill in start
+    data = "DATA\r\n"
+    clientSocket.send(data.encode())
+    recv4 = clientSocket.recv(1024)
     # Fill in end
 
     # Send message data.
     # Fill in start
+    subject = "Subject: SMTP Confirmation \r\n\r\n"
+    clientSocket.send(subject.encode())
     # Fill in end
 
     # Message ends with a single period, send message end and handle server response.
     # Fill in start
+    clientSocket.send(msg.encode())
+    clientSocket.send(endmsg.endcode())
     # Fill in end
 
     # Send QUIT command and handle server response.
     # Fill in start
+    clientSocket.send("QUIT\r\n".encode())
+    clientSocket.close()
     # Fill in end
 
 
