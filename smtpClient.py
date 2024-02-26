@@ -11,7 +11,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Fill in start
     clientSocket = socket(AF_INET,SOCK_STREAM)
-    clientSocket.connect(mailserver)
+    clientSocket.connect(mailserver,port)
     # Fill in end
 
     recv = clientSocket.recv(1024).decode()
@@ -30,39 +30,42 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Send MAIL FROM command and handle server response.
     # Fill in start
     fromCommand = "MAIL FROM:<yz2125@nyu.edu>\r\n"
-    clientSocket.send(fromCommand)
-    recv2=clientSocket.recv(1024)
+    clientSocket.send(fromCommand.encode())
+    recv2=clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send RCPT TO command and handle server response.
     # Fill in start
     rcptToCommand = "RCPT TO:<zhangyuxin1169@gmail.com>\r\n"
-    clientSocket.send(rcptToCommand)
-    recv3 = clintSocket.recv(1024)
+    clientSocket.send(rcptToCommand.encode())
+    recv3 = clintSocket.recv(1024).decode()
     # Fill in end
 
     # Send DATA command and handle server response.
     # Fill in start
     data = "DATA\r\n"
     clientSocket.send(data.encode())
-    recv4 = clientSocket.recv(1024)
+    recv4 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send message data.
     # Fill in start
     subject = "Subject: SMTP Confirmation \r\n\r\n"
     clientSocket.send(subject.encode())
+    clientSocket.send(msg.encode())
     # Fill in end
 
     # Message ends with a single period, send message end and handle server response.
     # Fill in start
-    clientSocket.send(msg.encode())
     clientSocket.send(endmsg.endcode())
+    recv5 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send QUIT command and handle server response.
     # Fill in start
-    clientSocket.send("QUIT\r\n".encode())
+    quitCommand = "QUIT\r\n"
+    clientSocket.send(quitCommand.encode())
+    recv6 = clientSocket.recv(1024).decode()
     clientSocket.close()
     # Fill in end
 
