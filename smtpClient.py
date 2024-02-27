@@ -1,6 +1,7 @@
 from socket import *
-
-def smtp_client(port=1025, mailserver='127.0.0.1'):
+MAIL_SERVER = '127.0.0,1'
+PORT = 1025
+def smtp_client(port=PORT, mailserver=MAIL_SERVER):
     msg = "\r\n My message"
     endmsg = "\r\n.\r\n"
 
