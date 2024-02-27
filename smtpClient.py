@@ -43,16 +43,17 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send DATA command and handle server response.
     # Fill in start
-    #data = "DATA\r\n"
-    clientSocket.send(msg.encoded())
-    clientSocket.send(endmsg.encode())
+    data = "DATA\r\n"
+    clientSocket.send(data.encode())
+    #clientSocket.send(msg.encoded())
+    #clientSocket.send(endmsg.encode())
     recv4 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send message data.
     # Fill in start
-    subject = "Subject: SMTP Confirmation \r\n\r\n"
-    clientSocket.send(subject.encode())
+    #subject = "Subject: SMTP Confirmation \r\n\r\n"
+    #clientSocket.send(subject.encode())
     clientSocket.send(msg.encode())
     # Fill in end
 
