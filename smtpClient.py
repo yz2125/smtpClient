@@ -5,13 +5,12 @@ import base64
     endmsg = "\r\n.\r\n"
 
     # Choose a mail server (e.g. Google mail server) if you want to verify the script beyond GradeScope
-    
+    mailserver = smtplib.SMTP(mailserver, port)
     # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
     # Fill in start
     clientSocket = socket(AF_INET,SOCK_STREAM)
-    clientSocket.connect((mailserver, port))
-    clientSocket.listen()
+    clientSocket.connect((mailserver))
     # Fill in end
 
     recv = clientSocket.recv(1024).decode()
